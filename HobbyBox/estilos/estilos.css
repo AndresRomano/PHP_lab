@@ -1,0 +1,47 @@
+.navbar-custom {
+    background-color: #333; /* Cambiar el color de fondo de la barra */
+  }
+
+  .login-box{
+    width: 400px;
+    height: 350px;
+    margin: auto;
+    background-color: rgb(44, 44, 44);
+    border-radius: 5px;
+    color: white;
+    }
+
+    .signup-box{
+        width: 400px;
+        height: 350px;
+        margin: auto;
+        background-color: rgb(44, 44, 44);
+        border-radius: 3px;
+        color: white;
+    }
+
+    h1 {
+        text-align: center;
+        padding-top: 15px;
+    }
+      
+      h4 {
+        text-align: center;
+    }
+      form label {
+        display: flex;
+        margin-top: 20px;
+        font-size: 18px;
+    }
+      
+      form input {
+        width: 100%;
+        padding: 7px;
+        border: none;
+        border: 1px solid gray;
+        border-radius: 6px;
+        outline: none;
+      }
+  /*.input-group .form-control {
+       width: ; Ajustar el ancho del input 
+  }*/
