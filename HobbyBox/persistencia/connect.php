@@ -3,7 +3,7 @@ class Conexion
 {
   public function conectar()
   {
-    $link = mysqli_connect("localhost", "root", "", "cure") or die("Error " . mysqli_error($link));
+    $link = mysqli_connect("localhost", "root", "", "bdphpproy") or die("Error " . mysqli_error($link));
     return $link;
   }
 

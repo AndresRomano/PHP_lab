@@ -15,33 +15,31 @@
     <div class="bg-dark text-light p-4 rounded">
       <h1 class="text-center">Registro</h1>
 
-      <form action="procesar.php" method="post">
+      <form action="../controladora/ctrlUsuario.php" method="post">
         <div class="mb-3">
           <label for="nombre" class="form-label">Nombre:</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" required>
+          <input type="text" class="form-control" id="nombre" name="fNombre" required>
         </div>
         <div class="mb-3">
           <label for="correo" class="form-label">Correo:</label>
-          <input type="email" class="form-control" id="correo" name="correo" required>
+          <input type="email" class="form-control" id="correo" name="fCorreo" required>
         </div>
         <div class="mb-3">
           <label for="contrasena" class="form-label">Contraseña:</label>
-          <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+          <input type="password" class="form-control" id="contrasena" name="fContrasena" required>
         </div>
         <div class="mb-3">
           <label for="fechaNacimiento" class="form-label">Fecha de nacimiento:</label>
-          <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+          <input type="date" class="form-control" id="fechaNacimiento" name="fFechaNacimiento" required>
         </div>
         <div class="text-center">
-          <button type="submit" class="btn btn-primary" name="Enviar">Enviar</button>
+          <button type="submit" class="btn btn-primary" name="EnviarUsr">Enviar</button>
           <button type="reset" class="btn btn-secondary">Reset</button>
         </div>
       </form>
       <p>Tienes una cuenta? <a href="login.php">Inicia sesión aquí</a></p>
     </div>
   </div>
-
-  <!-- Bootstrap JS -->
   
 </body>
 </html>
