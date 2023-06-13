@@ -9,7 +9,8 @@
   <title>Login</title>
 </head>
 <body class="img" style="background-image: url(../imagenes/bg.png);">
-  <?php include 'iniciarSesion.php'; ?>
+  <?php include 'navbar.php'; ?>
+  <?php include '../controladora/iniciarSesion.php'; ?>
   <div class="login-box">
     <div class="bg-dark text-light p-4 rounded">
     <h1>Iniciar sesión</h1>
