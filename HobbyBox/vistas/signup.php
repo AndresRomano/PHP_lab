@@ -40,6 +40,5 @@
       <p>Tienes una cuenta? <a href="login.php">Inicia sesión aquí</a></p>
     </div>
   </div>
-  
 </body>
 </html>

@@ -9,11 +9,11 @@
   <title>Login</title>
 </head>
 <body class="img" style="background-image: url(../imagenes/bg.png);">
-  <?php include 'navbar.php'; ?>
+  <?php include 'iniciarSesion.php'; ?>
   <div class="login-box">
     <div class="bg-dark text-light p-4 rounded">
     <h1>Iniciar sesión</h1>
-    <form action="login.php" method="post">
+    <form action="../controladora/iniciarSesion.php" method="post">
       <div class="mb-3">
         <label for="email" class="form-label">Correo</label>
         <input type="email" class="form-control" id="email" name="fEmail" required>
@@ -28,9 +28,5 @@
     </form>
     <p>No tienes una cuenta? <a href="signup.php">Regístrate aquí</a></p>
   </div>
-  </div>
-
-
- 
 </body>
 </html>

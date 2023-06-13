@@ -1,3 +1,11 @@
+<?php 
+if(isset($_SESSION["usuario"])){//si existe..
+            $btn="./vistas/botones/botonesLogged.php";
+        }else{
+          $btn="./vistas/botones/botones.php";
+        } 
+?>
+
 <header>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
@@ -6,14 +14,7 @@
                 <input class="form-control me-2" type="search" placeholder="Buscar: películas, cómics, libros; Por autor, saga, editorial..." aria-label="Search">
                 <button class="btn btn-outline-secondary" type="submit">Buscar</button>
               </form>
-              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="./vistas/login.php">Iniciar Sesión</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./vistas/signup.php">Registrarse</a>
-                </li>
-            </ul>
+              <?php include $btn; ?>
             </div>
 </nav>
 </header>
