@@ -1,5 +1,5 @@
 <?php 
-if(isset($_SESSION["usuario"])){//si existe..
+if(isset($_SESSION["correo"])){//si existe..
             $btn="./vistas/botones/botonesLogged.php";
         }else{
           $btn="./vistas/botones/botones.php";

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if ($_SESSION["rol"] !== "administrador") {
+  header("Location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,13 +21,13 @@
 
   <div class="contenedor1"><ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Usuarios</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Items</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Otros</button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>Disabled</button>
@@ -30,7 +36,7 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
   <div style="color: white;">
-  <form action="../controladora/ctrlUsuario.php" method="post">
+  <form action="./controladora/ctrlUsuario.php" method="post" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="nombre" class="form-label">Nombre:</label>
           <input type="text" class="form-control" id="nombre" name="fNombre" required>
@@ -50,27 +56,28 @@
         <div class="mb-3">
         <label for="Rol" class="form-label">Seleccione Rol:</label>
         <select class="custom-select mr-sm-2" id="inlineFormCustomSelect"  name="fRol">
-        <option value="Administrador">Administrador</option>
-        <option value="Usuario">Usuario</option>
+        <option value="Administrador">administrador</option>
+        <option value="Usuario">usuario</option>
         </select>
         </div>
         <div class="mb-3">
           <label for="formFile" class="form-label">Subir foto</label>
-          <input class="form-control" type="file" id="formFile">
+          <input class="form-control" type="file" id="formFile" name="fArchivo">
         </div>
         <div class="text-center">
-          <button type="submit" class="btn btn-primary" name="EnviarUsr">Enviar</button>
+          <button type="submit" class="btn btn-primary" name="EnviarAdm">Enviar</button>
           <button type="reset" class="btn btn-secondary">Reset</button>
         </div>
   </form>
+  <div> <?php include './vistas/tablas/tablaUsuario.php'; ?> </div>
   </div>
   </div>
   <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">BBBB</div>
   <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">VCCCC</div>
   <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">DDDDDD</div>
-</div>
   </div>
+</div>
 
-  <?php include './vistas/footer.php'; ?>
+<?php include './vistas/footer.php'; ?>
 </body>
 </html>

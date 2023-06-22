@@ -10,18 +10,17 @@
 </head>
 <body class="img" style="background-image: url(../imagenes/bg.png);">
   <?php include 'navbar.php'; ?>
-  <?php include '../controladora/iniciarSesion.php'; ?>
   <div class="login-box">
     <div class="bg-dark text-light p-4 rounded">
     <h1>Iniciar sesión</h1>
     <form action="../controladora/iniciarSesion.php" method="post">
       <div class="mb-3">
         <label for="email" class="form-label">Correo</label>
-        <input type="email" class="form-control" id="email" name="fEmail" required>
+        <input type="email" class="form-control" id="correo" name="fCorreo" required>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" name="fPassword" required>
+        <input type="password" class="form-control" id="contrasena" name="fContrasena" required>
       </div>
       <div class="d-grid gap-1 container-fluid" style="margin-top: 5%">
       <button type="submit" class="btn btn-primary">Acceder</button>
