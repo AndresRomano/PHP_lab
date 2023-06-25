@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION["rol"] !== "usuario") {
+if ($_SESSION["rol"] !== "administrador") {
   header("Location: index.php");
 }
 ?>
@@ -13,12 +13,23 @@ if ($_SESSION["rol"] !== "usuario") {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <title>Usuario</title>
+  <title>Other</title>
 </head>
+
 <body class="img" style="background-image: url(./imagenes/bg.png);">
-  <!-- Incluir el navbar utilizando la directiva de inclusión -->
-  <?php include './vistas/header.php'; ?>
-  <div class="contenedor1" style="height: 600px;"></div>
-  <?php include './vistas/footer.php'; ?>
+
+<?php include './vistas/header.php'; ?>
+
+<section>
+  <div class="contenedor1">
+  <?php include './vistas/FORM.php'; ?>
+
+  </div>
+  <div class="contenedor1">
+  <?php include './vistas/tablas/tablaUsuario.php'; ?>
+  </div>
+</section>
+
+<?php include './vistas/footer.php'; ?>
 </body>
 </html>

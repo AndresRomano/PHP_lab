@@ -1,3 +1,17 @@
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+footer {
+  margin-top: auto;
+}
+
 .navbar-custom {
   background-color: #333;
   /* Cambiar el color de fondo de la barra */
@@ -13,7 +27,6 @@
   background-color: rgb(44, 44, 44);
   font-weight: bold;
   padding: 20px;
-  position: relative;
   overflow: hidden;
   background-size: cover;
   background-position: center center;
@@ -59,8 +72,4 @@ form input {
   border: 1px solid gray;
   border-radius: 6px;
   outline: none;
-}
-
-footer {
-  margin-top: 1%;
 }

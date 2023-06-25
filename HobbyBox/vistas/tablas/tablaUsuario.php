@@ -1,7 +1,8 @@
+<div class="contenedor1">
     <?php 
     include ("./persistencia/connect.php");
     $con = new Conexion();?>
-    <table style="border: 1px solid; border-collapse: collapse;">
+    <table class="table table-striped table-bordered">
       <tr>
           <th>idusuario</th>
           <th>nombre</th>
@@ -28,3 +29,4 @@
     <?php
     }
     ?>
+</div>

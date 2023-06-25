@@ -13,21 +13,24 @@ session_start();
   <title>Index</title>
 </head>
 <body class="img" style="background-image: url(./imagenes/bg.png);">
-  <!-- Incluir el navbar utilizando la directiva de inclusión -->
+
   <?php include './vistas/header.php'; ?>
 
   <div class="contenedor1">
   <h5 style="color: white;">Libros:</h5>
     <?php include './vistas/cards/CardVertical.php'; ?>
   </div>
+
   <div class="contenedor1">
   <h5 style="color: white;">Películas:</h5>
     <?php include './vistas/cards/CardVertical.php'; ?>
   </div>
+
   <div class="contenedor1">
   <h5 style="color: white;">Cómics:</h5>
     <?php include './vistas/cards/CardVertical.php'; ?>
   </div>
+
   <div class="contenedor1">
   <h5 style="color: white;">Manga:</h5>
     <?php include './vistas/cards/CardVertical.php'; ?>

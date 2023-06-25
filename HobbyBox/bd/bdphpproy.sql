@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2023 a las 01:04:08
+-- Tiempo de generación: 26-06-2023 a las 01:30:25
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -225,7 +225,11 @@ INSERT INTO `usuario` (`idusuario`, `nombre`, `correo`, `password`, `fecha`, `pe
 (1, 'Admin', 'admin@admin', '202cb962ac59075b964b07152d234b70', '2023-06-04', 'administrador', NULL),
 (3, 'Manin', 'manin@gmail', '81dc9bdb52d04dc20036dbd8313ed055', '1995-05-10', 'usuario', NULL),
 (4, 'pc2', 'pc2@pc2.com', '81dc9bdb52d04dc20036dbd8313ed055', '2000-12-18', 'usuario', NULL),
-(5, 'reg4', 'regu@reg', '81dc9bdb52d04dc20036dbd8313ed055', '1990-05-26', 'usuario', NULL);
+(5, 'reg4', 'regu@reg', '81dc9bdb52d04dc20036dbd8313ed055', '1990-05-26', 'usuario', NULL),
+(6, 'img', 'img@test', '81dc9bdb52d04dc20036dbd8313ed055', '2023-06-19', 'usuario', 'npc.png'),
+(7, 'hola', 'hola@aloh', 'caf1a3dfb505ffed0d024130f58c5cfa', '2023-06-19', 'usuario', NULL),
+(8, 'test2', 'test3@test3', '202cb962ac59075b964b07152d234b70', '2023-06-07', 'usuario', NULL),
+(9, 'eladmin', 'adm@admin', '202cb962ac59075b964b07152d234b70', '2023-06-25', 'Administrador', 'admin.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -401,7 +405,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
