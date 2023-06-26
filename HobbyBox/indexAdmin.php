@@ -75,7 +75,6 @@ if ($_SESSION["rol"] !== "administrador") {
           <div class="text-center">
             <button type="submit" class="btn btn-primary" name="EnviarAdm">Alta</button>
             <button type="submit" class="btn btn-primary" name="Modificardatos">Modificar</button>
-            <button type="submit" class="btn btn-primary" name="Eliminardatos">Eliminar</button>
             <button type="reset" class="btn btn-secondary">Reset</button>
           </div>
     </form>

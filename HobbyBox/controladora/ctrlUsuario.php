@@ -69,6 +69,4 @@
                 exit;
             }
     }
-    // $sql = "update estudiante set edad='$edad' where ci='$ci'";
-        //$con->ejecutarSQL($sql);
 ?>
