@@ -1,3 +1,4 @@
+
 <div class="contenedor1">
     <?php 
     include ("./persistencia/connect.php");
@@ -29,4 +30,6 @@
     <?php
     }
     ?>
+     </table>
 </div>
+ 

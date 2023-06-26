@@ -9,11 +9,31 @@
     $nombrearchivo = $_FILES['fArchivo']['name'];
     $rutaDestino ="../imagenes/";
     $rutaArchivo = $rutaDestino.$nombrearchivo;
-    if (move_uploaded_file($_FILES['fArchivo']['tmp_name'], $rutaArchivo) and $_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['EnviarAdm'])) {
-    // if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['EnviarAdm'])){
-        $sql ="INSERT INTO usuario(nombre, correo, password, fecha, permisos, imagen) VALUES ('$nombre', '$correo', '$pass', '$fNac', '$rol', '$nombrearchivo')";
-        $con->ejecutarSQL($sql);
-        header("location: ../indexAdmin.php");
+
+            if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['EnviarAdm'])) {       
+            // Verificar si se envió un archivo
+            if (!empty($_FILES['fArchivo']['name'])) {
+                $nombreArchivo = $_FILES['fArchivo']['name'];
+                $rutaArchivo = $rutaDestino.$nombrearchivo;
+        
+                // Mover el archivo a la ubicación deseada
+                if (move_uploaded_file($_FILES['fArchivo']['tmp_name'], $rutaArchivo)) {
+                    $sql = "INSERT INTO usuario (nombre, correo, password, fecha, permisos, imagen) VALUES ('$nombre', '$correo', '$pass', '$fNac', '$rol', '$nombreArchivo')";
+                    $con->ejecutarSQL($sql);
+                    header("location: ../indexAdmin.php");
+                    exit;
+                } else {
+                    echo "Error al mover el archivo";
+                }
+            } else {
+                $nombreArchivo = null;
+                $sql = "INSERT INTO usuario (nombre, correo, password, fecha, permisos, imagen) VALUES ('$nombre', '$correo', '$pass', '$fNac', '$rol', '$nombreArchivo')";
+                $con->ejecutarSQL($sql);
+                header("location: ../indexAdmin.php");
+                exit;
+            }
+            
+           
     }elseif($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['EnviarUsr'])){
         $permiso="usuario";
         $sql ="INSERT INTO usuario(nombre, correo, password, fecha, permisos) VALUES ('$nombre', '$correo', '$pass', '$fNac', '$permiso')";
