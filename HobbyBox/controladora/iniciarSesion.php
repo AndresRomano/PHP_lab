@@ -37,8 +37,14 @@ if ($resultado->num_rows == 1) {
     header("Location: ../indexUser.php");
   } else {
     // Rol desconocido, credenciales incorrectas
+    
     header("Location: ../vistas/login.php");
   }
+}
+else {
+  //  credenciales incorrecta
+  header("Location: ../vistas/login.php?error=true");
+  
 }
 
 ?>

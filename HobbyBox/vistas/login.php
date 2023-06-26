@@ -22,6 +22,13 @@
         <label for="password" class="form-label">Contraseña</label>
         <input type="password" class="form-control" id="contrasena" name="fContrasena" required>
       </div>
+
+      <?php
+        if (isset($_GET['error'])) {
+          echo '<label for="genero" class="form-label" style="color:red">Credenciales incorrectas. Por favor, ingrese los datos nuevamente.</label>';
+        }
+        ?>
+
       <div class="d-grid gap-1 container-fluid" style="margin-top: 5%">
       <button type="submit" class="btn btn-primary">Acceder</button>
       </div>
