@@ -10,8 +10,8 @@
     $rutaDestino ="../imagenes/";
     $rutaArchivo = $rutaDestino.$nombrearchivo;
 
-            if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['EnviarAdm'])) {       
-            // Verificar si se envió un archivo
+     if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['EnviarAdm'])) {       
+        // Verificar si se envió un archivo
             if (!empty($_FILES['fArchivo']['name'])) {
                 $nombreArchivo = $_FILES['fArchivo']['name'];
                 $rutaArchivo = $rutaDestino.$nombrearchivo;
@@ -39,13 +39,36 @@
         $sql ="INSERT INTO usuario(nombre, correo, password, fecha, permisos) VALUES ('$nombre', '$correo', '$pass', '$fNac', '$permiso')";
         $con->ejecutarSQL($sql);
         header("location: ../index.php");
+
     }elseif($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['Eliminardatos'])){
         $sql = "delete from usuario where correo='$correo'";
         $con->ejecutarSQL($sql);
         header("location: ../indexAdmin.php");
+
     }elseif($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['Modificardatos'])){
-        // $sql = "update estudiante set edad='$edad' where ci='$ci'";
-        //$con->ejecutarSQL($sql);
-        header("location: ../index.php");
+        
+        if (!empty($_FILES['fArchivo']['name'])) {
+            $nombreArchivo = $_FILES['fArchivo']['name'];
+            $rutaArchivo = $rutaDestino.$nombrearchivo;
+    
+            // Mover el archivo a la ubicación deseada
+            if (move_uploaded_file($_FILES['fArchivo']['tmp_name'], $rutaArchivo)) {
+        
+            $sql = "UPDATE usuario SET nombre = '$nombre', password = '$pass', fecha = '$fNac', permisos = '$rol', imagen = '$nombrearchivo' WHERE correo = '$correo'";
+            $con->ejecutarSQL($sql);
+            header("location: ../indexAdmin.php");
+            exit;
+                } else {
+                    echo "Error al mover el archivo";
+                }
+        } else {
+                $nombreArchivo = null;
+                $sql = "UPDATE usuario SET nombre = '$nombre', correo ='$correo', password = '$pass', fecha = '$fNac', permisos = '$rol', imagen = '$nombrearchivo' WHERE correo = '$correo'";
+                $con->ejecutarSQL($sql);
+                header("location: ../indexAdmin.php");
+                exit;
+            }
     }
+    // $sql = "update estudiante set edad='$edad' where ci='$ci'";
+        //$con->ejecutarSQL($sql);
 ?>
