@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2023 a las 01:30:25
+-- Tiempo de generación: 27-06-2023 a las 07:00:06
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -56,6 +56,14 @@ CREATE TABLE `autores` (
   `nombre` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `autores`
+--
+
+INSERT INTO `autores` (`idAutor`, `nombre`) VALUES
+(2, 'Alan Wake'),
+(1, 'Brandon Sanderson');
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +74,16 @@ CREATE TABLE `categorias` (
   `idcategorias` int(11) NOT NULL,
   `nombreCategoria` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`idcategorias`, `nombreCategoria`) VALUES
+(1, 'libro'),
+(2, 'pelicula'),
+(3, 'comic'),
+(4, 'manga');
 
 -- --------------------------------------------------------
 
@@ -78,6 +96,15 @@ CREATE TABLE `coleccion` (
   `nombre` varchar(45) NOT NULL,
   `categoria` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `coleccion`
+--
+
+INSERT INTO `coleccion` (`idcoleccion`, `nombre`, `categoria`) VALUES
+(1, 'Chainsaw Man (manga)', 'manga'),
+(2, 'El Archivo De Las Tormentas (Libro)', 'libro'),
+(3, 'Battle Chasers (Cómic)', 'comic');
 
 -- --------------------------------------------------------
 
@@ -115,6 +142,15 @@ CREATE TABLE `genero` (
   `nombre` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `genero`
+--
+
+INSERT INTO `genero` (`idGenero`, `nombre`) VALUES
+(3, 'Comedia'),
+(1, 'Fantasía'),
+(4, 'Terror');
+
 -- --------------------------------------------------------
 
 --
@@ -135,14 +171,23 @@ CREATE TABLE `genero-item` (
 
 CREATE TABLE `item` (
   `iditem` int(11) NOT NULL,
-  `idColeccion` int(11) DEFAULT NULL,
+  `coleccion` varchar(45) NOT NULL,
   `titulo` varchar(45) DEFAULT NULL,
+  `genero` varchar(45) NOT NULL,
   `descripcion` varchar(250) DEFAULT NULL,
-  `año` date DEFAULT NULL,
+  `autor` varchar(45) NOT NULL,
+  `año` int(11) DEFAULT NULL,
   `puntaje` int(11) DEFAULT NULL,
   `imagen` varchar(45) DEFAULT NULL,
   `fechaIngreso` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `item`
+--
+
+INSERT INTO `item` (`iditem`, `coleccion`, `titulo`, `genero`, `descripcion`, `autor`, `año`, `puntaje`, `imagen`, `fechaIngreso`) VALUES
+(1, 'El Archivo De Las Tormentas (Libro)', '1: El Camino De Los Reyes', 'Fantasía', 'El camino de los reyes es una novela de fantasía épica escrita por el autor estadounidense Brandon Sanderson y el primer libro de la saga El archivo de las Tormentas.', 'Brandon Sanderson', 1997, NULL, '1-elCamDeR.JPG', '2023-06-27');
 
 -- --------------------------------------------------------
 
@@ -222,14 +267,14 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `nombre`, `correo`, `password`, `fecha`, `permisos`, `imagen`) VALUES
-(1, 'Admin', 'admin@admin', '202cb962ac59075b964b07152d234b70', '2023-06-04', 'administrador', NULL),
 (3, 'Manin', 'manin@gmail', '81dc9bdb52d04dc20036dbd8313ed055', '1995-05-10', 'usuario', NULL),
 (4, 'pc2', 'pc2@pc2.com', '81dc9bdb52d04dc20036dbd8313ed055', '2000-12-18', 'usuario', NULL),
 (5, 'reg4', 'regu@reg', '81dc9bdb52d04dc20036dbd8313ed055', '1990-05-26', 'usuario', NULL),
 (6, 'img', 'img@test', '81dc9bdb52d04dc20036dbd8313ed055', '2023-06-19', 'usuario', 'npc.png'),
-(7, 'hola', 'hola@aloh', 'caf1a3dfb505ffed0d024130f58c5cfa', '2023-06-19', 'usuario', NULL),
 (8, 'test2', 'test3@test3', '202cb962ac59075b964b07152d234b70', '2023-06-07', 'usuario', NULL),
-(9, 'eladmin', 'adm@admin', '202cb962ac59075b964b07152d234b70', '2023-06-25', 'Administrador', 'admin.jpg');
+(9, 'eladmin', 'adm@admin', '202cb962ac59075b964b07152d234b70', '2023-06-25', 'administrador', 'admin.jpg'),
+(10, 'andres', 'adfsfsd@hj', '81dc9bdb52d04dc20036dbd8313ed055', '2023-06-09', 'administrador', 'calendario2023-cuandopasa.gif'),
+(11, 'admin', 'admin@admin', '202cb962ac59075b964b07152d234b70', '2023-06-26', 'administrador', '');
 
 --
 -- Índices para tablas volcadas
@@ -251,7 +296,8 @@ ALTER TABLE `autor-obra`
 -- Indices de la tabla `autores`
 --
 ALTER TABLE `autores`
-  ADD PRIMARY KEY (`idAutor`);
+  ADD PRIMARY KEY (`idAutor`),
+  ADD KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `categorias`
@@ -263,7 +309,8 @@ ALTER TABLE `categorias`
 -- Indices de la tabla `coleccion`
 --
 ALTER TABLE `coleccion`
-  ADD PRIMARY KEY (`idcoleccion`);
+  ADD PRIMARY KEY (`idcoleccion`),
+  ADD KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `coleccion-usuario`
@@ -281,7 +328,8 @@ ALTER TABLE `comentario`
 -- Indices de la tabla `genero`
 --
 ALTER TABLE `genero`
-  ADD PRIMARY KEY (`idGenero`);
+  ADD PRIMARY KEY (`idGenero`),
+  ADD KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `genero-item`
@@ -293,7 +341,10 @@ ALTER TABLE `genero-item`
 -- Indices de la tabla `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`iditem`);
+  ADD PRIMARY KEY (`iditem`),
+  ADD KEY `coleccion_coleccion_item` (`coleccion`),
+  ADD KEY `genero_genero_item` (`genero`),
+  ADD KEY `autores_autor_item` (`autor`);
 
 --
 -- Indices de la tabla `itemdeseado-usuario`
@@ -345,19 +396,19 @@ ALTER TABLE `autor-obra`
 -- AUTO_INCREMENT de la tabla `autores`
 --
 ALTER TABLE `autores`
-  MODIFY `idAutor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAutor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `idcategorias` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcategorias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `coleccion`
 --
 ALTER TABLE `coleccion`
-  MODIFY `idcoleccion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcoleccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `coleccion-usuario`
@@ -375,7 +426,7 @@ ALTER TABLE `comentario`
 -- AUTO_INCREMENT de la tabla `genero`
 --
 ALTER TABLE `genero`
-  MODIFY `idGenero` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idGenero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `genero-item`
@@ -387,7 +438,7 @@ ALTER TABLE `genero-item`
 -- AUTO_INCREMENT de la tabla `item`
 --
 ALTER TABLE `item`
-  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `itemdeseado-usuario`
@@ -405,7 +456,19 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `item`
+--
+ALTER TABLE `item`
+  ADD CONSTRAINT `autores_autor_item` FOREIGN KEY (`autor`) REFERENCES `autores` (`nombre`),
+  ADD CONSTRAINT `coleccion_coleccion_item` FOREIGN KEY (`coleccion`) REFERENCES `coleccion` (`nombre`),
+  ADD CONSTRAINT `genero_genero_item` FOREIGN KEY (`genero`) REFERENCES `genero` (`nombre`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

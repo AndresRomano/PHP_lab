@@ -13,6 +13,7 @@ if ($_SESSION["rol"] !== "administrador") {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="./scripts/script.js"></script>
   <title>Other</title>
 </head>
 
@@ -20,15 +21,10 @@ if ($_SESSION["rol"] !== "administrador") {
 
 <?php include './vistas/header.php'; ?>
 
-<section>
-  <div class="contenedor1">
-  <?php include './vistas/FORM.php'; ?>
 
-  </div>
   <div class="contenedor1">
-  <?php include './vistas/tablas/tablaUsuario.php'; ?>
+  <?php include './vistas/formItems.php'; ?>
   </div>
-</section>
 
 <?php include './vistas/footer.php'; ?>
 </body>

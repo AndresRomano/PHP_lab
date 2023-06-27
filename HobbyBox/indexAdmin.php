@@ -87,113 +87,32 @@ if ($_SESSION["rol"] !== "administrador") {
       </div>
     </div>
     <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-      <div style="color: white;">
-      <form action="./controladora/ctrlItem.php" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                  <label for="titulo" class="form-label">Titulo:</label>
-                  <input type="text" class="form-control" id="titulo" name="fTitulo" required>
-                </div>
-                <div class="mb-3">
-                  <label for="descripcion" class="form-label">Descripcion:</label>
-                  <input type="text" class="form-control" id="descripcion" name="fDescripcion" required>
-                </div>
-                <div class="mb-3">
-                  <label for="anio" class="form-label">Año:</label>
-                  <input type="number" class="form-control" id="anio" name="fAnio" min="1900" max="2099" step="1" placeholder="Ingrese un año (1900-2099)" required>
-                </div>
-                <div class="mb-3">
-                  <label for="puntaje" class="form-label">Puntaje:</label>
-                  <input type="number" class="form-control" id="puntaje" name="fPuntaje" min="1" max="5" step="1" placeholder="Ingrese un puntaje (1-5)" required>
-                </div>
-                <div class="mb-3">
-                  <label for="formFile" class="form-label">Subir Imagen:</label>
-                  <input class="form-control" type="file" id="formFile" name="fArchivo">
-                </div>
-                <div class="mb-3">
-                  <label for="fechaIngreso" class="form-label">Fecha de Ingreso:</label>
-                  <input type="date" class="form-control" id="fechaIngreso" name="fFechaIngreso" required>
-                </div>
-
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary" name="EnviarAdm">Alta</button>
-                  <button type="submit" class="btn btn-primary" name="Modificardatos">Modificar</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-      </form>
-      </div>
-
+    
+    <?php include './vistas/formItems.php'; ?>
+    <?php include './vistas/tablas/tablaItems.php'; ?>
 
     </div>
     <div class="tab-pane fade" id="category-tab-pane" role="tabpanel" aria-labelledby="category-tab" tabindex="0">
-      <div style="color: white;">
-        <form action="./controladora/ctrlCategoria.php" method="post" enctype="multipart/form-data">
-                  <div class="mb-3">
-                    <label for="categoria" class="form-label">Nombre de Categoria:</label>
-                    <input type="text" class="form-control" id="categoria" name="fCategoria" required>
-                  </div>
-        </form>
-      </div>
-
-      <div class="text-center">
-                  <button type="submit" class="btn btn-primary" name="EnviarAdm">Alta</button>
-                  <button type="submit" class="btn btn-primary" name="Modificardatos">Modificar</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-      </div>
+      
+    <?php include './vistas/tablas/tablaCategoria.php'; ?>
+    
     </div>
     <div class="tab-pane fade" id="colection-tab-pane" role="tabpanel" aria-labelledby="colection-tab" tabindex="0">
-      <div style="color: white;">
-          <form action="./controladora/ctrlColeccion.php" method="post" enctype="multipart/form-data">
-                    <div class="mb-3">
-                      <label for="categoria" class="form-label">Nombre de Coleccion:</label>
-                      <input type="text" class="form-control" id="coleccion" name="fColeccion" required>
-                    </div>
-                    <div class="mb-3">
-                    <?php //luego mostrar las categorias para elegir ?>
-                      <label for="categoria" class="form-label">Categoria:</label>
-                      <input type="text" class="form-control" id="categoria" name="fCategoria" required>
-                    </div>
-          </form>
-        </div>
 
-        <div class="text-center">
-                    <button type="submit" class="btn btn-primary" name="EnviarAdm">Alta</button>
-                    <button type="submit" class="btn btn-primary" name="Modificardatos">Modificar</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-      </div>
+    <?php include './vistas/formCol.php'; ?>
+    <?php include './vistas/tablas/tablaColecciones.php'; ?>
 
     </div>
     <div class="tab-pane fade" id="autor-tab-pane" role="tabpanel" aria-labelledby="autor-tab" tabindex="0">
-      <div style="color: white;">
-          <form action="./controladora/ctrlAutor.php" method="post" enctype="multipart/form-data">
-                    <div class="mb-3">
-                      <label for="autor" class="form-label">Nombre del Autor:</label>
-                      <input type="text" class="form-control" id="autor" name="fAutor" required>
-                    </div>
-          </form>
-      </div>
-
-      <div class="text-center">
-                  <button type="submit" class="btn btn-primary" name="EnviarAdm">Alta</button>
-                  <button type="submit" class="btn btn-primary" name="Modificardatos">Modificar</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-      </div>
+      
+    <?php include './vistas/formAut.php'; ?>
+    <?php include './vistas/tablas/tablaAutores.php'; ?>
 
     </div>
     <div class="tab-pane fade" id="gender-tab-pane" role="tabpanel" aria-labelledby="gender-tab" tabindex="0">
-      <div style="color: white;">
-            <form action="./controladora/ctrlGenero.php" method="post" enctype="multipart/form-data">
-                      <div class="mb-3">
-                        <label for="genero" class="form-label">Nombre del Genero:</label>
-                        <input type="text" class="form-control" id="genero" name="fGenero" required>
-                      </div>
-            </form>
-      </div>
-
-      <div class="text-center">
-                  <button type="submit" class="btn btn-primary" name="EnviarAdm">Alta</button>
-                  <button type="submit" class="btn btn-primary" name="Modificardatos">Modificar</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-      </div>
+      
+    <?php include './vistas/formGen.php'; ?>
+    <?php include './vistas/tablas/tablaGeneros.php'; ?>
 
     </div>
     </div>
