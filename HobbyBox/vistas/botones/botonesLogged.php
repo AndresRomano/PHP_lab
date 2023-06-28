@@ -6,11 +6,10 @@ if ($_SESSION["rol"] == "administrador") {
 }
 ?>
 <?php
-if ($_SESSION["foto"] !== null) {
-  // $imagePath = "./imagenes/" . $_SESSION["foto"];
+if (isset($_SESSION["foto"]) && !empty($_SESSION["foto"])) {
   $imagePath = "./imagenes/".$_SESSION["foto"];
 } else {
-  $imagePath = "./imagenes/item_cards/no-image.jpg";
+  $imagePath = "./imagenes/no-image.jpg";
 }
 ?>
 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
