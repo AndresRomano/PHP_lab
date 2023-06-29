@@ -17,7 +17,7 @@ $name = $_SESSION["idUser"];
     foreach ($con->ejecutarSQL($sql1) as $row){
     ?> 
     <tr>
-    <td><?php echo $row['idAmigo']  ?></td>
+     
     <td><?php echo $row['nombre'] ?></td>
     <td><?php echo $row['imagen'] ?></td>
     

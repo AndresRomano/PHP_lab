@@ -35,7 +35,9 @@ session_start();
   <h5 style="color: white;">Manga:</h5>
   <?php $categoria = 'manga'; include './vistas/cards/cardVertical.php'?>
   </div>
-
+  <br>
   <?php include './vistas/footer.php'; ?>
+
+  
 </body>
 </html>
