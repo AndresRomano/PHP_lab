@@ -7,7 +7,7 @@ $name = $_SESSION["idUser"];
     $con = new Conexion();?>
     <table class="table table-striped table-bordered">
       <tr>
-          <th>idusuario</th>
+          
           <th>nombre</th>
           <th>imagen</th>
           <th></th>

@@ -55,7 +55,7 @@ if ($resultado && $resultado->num_rows > 0) {
       <div class="container">
         <div class="row">
           <div class="col-md-3">
-            <img src="' . $imagePath . '" alt="' . $titulo . '" height="384">
+            <img src="' . $imagePath . '" alt="' . $titulo . '" height="384" class="img-fluid">
           </div>
           <div class="col-md-6">
             <h2>' . $titulo . '</h2>
@@ -76,8 +76,7 @@ if ($resultado && $resultado->num_rows > 0) {
                 <option value="5">5</option>
               </select>
               <button type="submit" class="btn btn-dark" name="Enviar">Enviar</button>
-            </form>
-
+              </form><br> 
             <div class="btn-group">
               <form action="./controladora/ctrlItemObt.php" method="POST">
                 <input type="hidden" name="itemId" value="' . $id . '">
@@ -103,4 +102,6 @@ if ($resultado && $resultado->num_rows > 0) {
 <?php include './vistas/footer.php'; ?>
 </body>
 </html>
+
+
 
