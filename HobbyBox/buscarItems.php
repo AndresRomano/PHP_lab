@@ -10,7 +10,7 @@ session_start();
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <title>Index</title>
+  <title>Busqueda</title>
 </head>
 <body class="img" style="background-image: url(./imagenes/bg.png);">
 
@@ -40,17 +40,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $descripcion = $row['descripcion'];
         $puntaje = $row['puntaje'];
 
-        echo '<a href="./item.php?id=' . $id . '">';
-        echo '<div class="card mb-3" style="max-width: 540px;">';
+        if (isset($imagen) && !empty($imagen)) {
+          $imagePath = "./imagenes/item_cards/".$imagen;
+        } else {
+          $imagePath = "./imagenes/item_cards/no-image.jpg";
+        }
+
+        echo '<a href="./item.php?id=' . $id . '" style="text-decoration: none;">';
+        echo '<div class="card mb-3 bg-dark text-white" style="max-width: 540px;">';
         echo '<div class="row g-0">';
         echo '<div class="col-md-4">';
-        echo '<img src="./imagenes/item_cards/' . $imagen . '" class="img-fluid rounded-start" alt="' . $titulo . '">';
+        echo '<img src="' . $imagePath . '" class="img-fluid rounded-start" alt="' . $titulo . '">';
         echo '</div>';
         echo '<div class="col-md-8">';
         echo '<div class="card-body">';
         echo '<h5 class="card-title">' . $titulo . '</h5>';
         echo '<p class="card-text">' . $descripcion . '</p>';
-        echo '<p class="card-text"><small class="text-body-secondary">Puntaje: ' . $puntaje . '</small></p>';
+        echo '<p class="card-text">Puntaje: ' . $puntaje . '</p>';
         echo '</div>';
         echo '</div>';
         echo '</div>';

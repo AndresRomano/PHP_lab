@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-06-2023 a las 05:36:33
+-- Tiempo de generación: 29-06-2023 a las 05:02:20
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -190,7 +190,7 @@ CREATE TABLE `item` (
 INSERT INTO `item` (`iditem`, `coleccion`, `titulo`, `genero`, `descripcion`, `autor`, `año`, `puntaje`, `imagen`, `fechaIngreso`) VALUES
 (1, 'El Archivo De Las Tormentas (Libro)', '1: El Camino De Los Reyes', 'Fantasía', 'El camino de los reyes es una novela de fantasía épica escrita por el autor estadounidense Brandon Sanderson y el primer libro de la saga El archivo de las Tormentas.', 'Brandon Sanderson', 1997, NULL, '1-elCamDeR.JPG', '2023-06-27'),
 (2, 'El Archivo De Las Tormentas (Libro)', '2: Palabras Radiantes', 'Fantasía', 'Palabras Radiantes es una novela de fantasía épica escrita por el autor estadounidense Brandon Sanderson y el segundo libro de la saga El archivo de las Tormentas.', 'Brandon Sanderson', 2015, NULL, '', '2023-06-27'),
-(3, 'Battle Chasers (Cómic)', 'Battle Chasers - Anthología Integral', 'Fantasía', 'Este volumen recopila todos los números publicados de uno de los cómics más queridos de todos los tiempos. ¡En esta edición de la obra de Joe Madureira y Munier Sharrieff se combinan elementos de fantasía, steampunk y ciencia ficción con aventura y a', 'Joe Madureira', 2011, NULL, 'battle-chasers-anthology.jpg', '2023-06-27');
+(3, 'Battle Chasers (Cómic)', 'Battle Chasers - Anthología Integral', 'Fantasía', 'Este volumen recopila todos los números publicados de uno de los cómics más queridos de todos los tiempos. ¡En esta edición de la obra de Joe Madureira y Munier Sharrieff se combinan elementos de fantasía, steampunk y ciencia ficción con aventura y a', 'Joe Madureira', 2011, 5, 'battle-chasers-anthology.jpg', '2023-06-27');
 
 -- --------------------------------------------------------
 
@@ -235,6 +235,13 @@ CREATE TABLE `puntaje` (
   `usuario` int(11) NOT NULL,
   `nota` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `puntaje`
+--
+
+INSERT INTO `puntaje` (`idpuntaje`, `item`, `usuario`, `nota`) VALUES
+(1, 3, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -454,6 +461,12 @@ ALTER TABLE `itemdeseado-usuario`
 --
 ALTER TABLE `permisos`
   MODIFY `idrol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `puntaje`
+--
+ALTER TABLE `puntaje`
+  MODIFY `idpuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
