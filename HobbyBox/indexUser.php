@@ -19,7 +19,7 @@ if ($_SESSION["rol"] !== "usuario") {
   <!-- Incluir el navbar utilizando la directiva de inclusión -->
   <?php include './vistas/header.php'; ?>
   <div class="contenedor1" style="height: 600px;">
-  <?php include './vistas/FUser.php'; ?>
+  <?php include './vistas/mainUser.php'; ?>
     <br>
 
     
