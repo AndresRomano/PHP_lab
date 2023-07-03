@@ -16,10 +16,9 @@
             <a id="enlace-amigos" class="nav-link" href="#">Amigos</a>
         </li>
     </ul>
-      <form class="d-flex flex-grow-1">
-        <input class="form-control me-2 flex-grow-1" type="text" placeholder="Mis Amigos">
-        <button class="btn btn-default" type="submit" type="submit">
-          <i class="glyphicon glyphicon-search"></i>
+      <form class="d-flex ms-auto mb-2 mb-lg-0 flex-grow-1" action="buscarAmigos.php" method="post">
+      <input class="form-control me-2" type="search" name ="fSearch2" placeholder="Buscar Amigos..." aria-label="Search">
+      <button class="btn btn-outline-secondary" type="submit">Buscar</button>
         </button>
       </form>
     </div>

@@ -1,9 +1,9 @@
 <?php
+// Iniciar la sesión
+session_start();
 // Incluir el archivo de conexión a la base de datos
 include("../persistencia/connect.php");
 $con = new Conexion();
-// Iniciar la sesión
-session_start();
 
 // Obtener los datos de inicio de sesión del formulario
 $correo = $_POST["fCorreo"];
@@ -13,24 +13,29 @@ $contrasenia = md5($_POST["fContrasena"]);
 $sql = "SELECT * FROM usuario WHERE correo = '$correo' AND password = '$contrasenia'";
 $resultado = $con->ejecutarSQL($sql);
 
+$sql3 = "SELECT permisos FROM usuario WHERE correo = '$correo'";
+$sql4 = "SELECT idUsuario FROM usuario WHERE correo = '$correo'";
+$sql5 = "SELECT imagen FROM usuario WHERE correo = '$correo'";
+$sql6 = "SELECT nombre FROM usuario WHERE correo = '$correo'";
 // Comprobar si se encontró un usuario válido
 if ($resultado->num_rows == 1) {
   // Obtener el rol del usuario desde la base de datos
-  $sql3 = "SELECT permisos FROM usuario WHERE correo = '$correo'";
   $rol = $con->ejecutarSQL($sql3)->fetch_assoc()["permisos"];
   // obtener id de usuario
-  $sql4 = "SELECT idUsuario FROM usuario WHERE correo = '$correo'";
   $id = $con->ejecutarSQL($sql4)->fetch_assoc()["idUsuario"];
   // obtener imagen de usuario
-  $sql5 = "SELECT imagen FROM usuario WHERE correo = '$correo'";
   $foto = $con->ejecutarSQL($sql5)->fetch_assoc()["imagen"];
+  // obtener nombre de usuario
+  $nombre = $con->ejecutarSQL($sql6)->fetch_assoc()["nombre"];
   // Guardar el rol en una variable de sesión
   $_SESSION["idUser"]=$id;
   $_SESSION["foto"]=$foto;
+  $_SESSION["nombre"]=$nombre;
   $_SESSION["rol"] = $rol;
   $_SESSION["correo"]=$correo;
   $_SESSION["contrasenia"]=$contrasenia;
   // Redirigir según el rol del usuario
+
   if ($rol == "administrador") {
     header("Location: ../indexAdmin.php");
   } elseif ($rol == "usuario") {
@@ -44,7 +49,6 @@ if ($resultado->num_rows == 1) {
 else {
   //  credenciales incorrecta
   header("Location: ../vistas/login.php?error=true");
-  
 }
 
 ?>

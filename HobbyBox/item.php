@@ -146,12 +146,7 @@ if ($resultado && $resultado->num_rows > 0) {
                   </div>
                   <p class="small mb-0">' . $mensaje . '</p>
                 </div>
-                <form action="./controladora/ctrlRespuesta.php" method="POST">
-                  <input type="hidden" name="comentarioId" value="' . $comentarioId . '">
-                  <input type="hidden" name="itemId" value="' . $id . '">
-                  <textarea class="form-control" name="respuesta" placeholder="Escribe tu respuesta"></textarea>
-                  <button type="submit" class="btn btn-dark">Responder</button>
-                </form>
+               
               </div>
             </div>';
 
@@ -171,13 +166,14 @@ if ($resultado && $resultado->num_rows > 0) {
               $imgUsuario = $row['imagen'];
 
               if (isset($imgUsuario) && !empty($imgUsuario)) {
-                $imagePath = "./imagenes/item_cards/" . $imgUsuario;
+                $imagePath = "./imagenes/" . $imgUsuario;
               } else {
-                $imagePath = "./imagenes/item_cards/no-image.jpg";
+                $imagePath = "./imagenes/no-image.jpg";
               }
 
               // Mostrar la respuesta
               echo '
+              <div class="bg-secondary rounded-start rounded-end col" style="padding: 10px; margin: 10px;">
               <div class="contenedor1" style="color:white;">
               <div class="respuesta">
                 <div class="d-flex flex-start">
@@ -194,11 +190,18 @@ if ($resultado && $resultado->num_rows > 0) {
                   </div>
                 </div>
               </div>
-              </div>';
+              </div>
+              ';
             }
           }
 
-          echo '</div>'; // Cerrar el div del comentario
+          echo '</div> </div>
+          <form action="./controladora/ctrlRespuesta.php" method="POST">
+          <input type="hidden" name="comentarioId" value="' . $comentarioId . '">
+          <input type="hidden" name="itemId" value="' . $id . '">
+          <textarea class="form-control" name="respuesta" placeholder="Escribe tu respuesta" style="margin: 10px;"></textarea>
+          <button type="submit" class="btn btn-dark" name="Enviar">Responder</button>
+        </form>'; // Cerrar el div del comentario
         }
       }
       ?>
