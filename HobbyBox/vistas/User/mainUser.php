@@ -38,6 +38,10 @@ if (isset($_SESSION["nombre"])) {
               <p class="small text-muted mb-1">Buesquedas</p>
               <p class="mb-0">8.5</p>
           </div>
+          <div>
+              <p class="small text-muted mb-1">bibliotecas</p>
+              <p class="mb-0">8.5</p>
+          </div>
       </div>
   </div>
 
@@ -52,8 +56,12 @@ if (isset($_SESSION["nombre"])) {
     <div id="amigos" class="contenedor1 " style="height: 600px;">
           <?php include './vistas/User/buscadosUser.php'; ?>
     </div>
+    <div id="bibliotecas" class="contenedor1 ">
+          <?php include './vistas/indexBiblioteca.php'; ?>
+    </div>
   </div>
 </div>
+
   <?php include './vistas/User/listaAmigos.php'; ?>
 
 </main>

@@ -18,7 +18,7 @@ if ($_SESSION["rol"] !== "usuario") {
 <body class="img" style="background-image: url(./imagenes/bg.png);">
   <!-- Incluir el navbar utilizando la directiva de inclusión -->
   <?php include './vistas/header.php'; ?>
-  <div class="contenedor1" style="height: 600px;">
+  <div class="contenedor1">
   <?php include './vistas/User/mainUser.php'; ?>
     <br>
 

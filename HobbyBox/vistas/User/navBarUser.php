@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-start rounded-end">
   <div class="container-fluid">
-    <a class="navbar-brand" href="./indexUser.php">Mi Biblioteca</a>
+    <a class="navbar-brand nav-link" href="#" id="enlace-bibliotecas">Mi Biblioteca</a>
     <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
