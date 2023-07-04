@@ -22,7 +22,10 @@
         <label for="password" class="form-label">Contraseña</label>
         <input type="password" class="form-control" id="contrasena" name="fContrasena" required>
       </div>
-
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+        <label class="form-check-label" for="rememberMe">Recordarme</label>
+      </div>
       <?php
         if (isset($_GET['error'])) {
           echo '<label for="genero" class="form-label" style="color:red">Credenciales incorrectas. Por favor, ingrese los datos nuevamente.</label>';

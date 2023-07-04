@@ -9,6 +9,9 @@ $con = new Conexion();
 $correo = $_POST["fCorreo"];
 $contrasenia = md5($_POST["fContrasena"]);
 
+// Obtener el valor del checkbox "Remember Me"
+$rememberMe = isset($_POST['rememberMe']) && $_POST['rememberMe'] === 'on';
+
 // Validar los datos de inicio de sesión
 $sql = "SELECT * FROM usuario WHERE correo = '$correo' AND password = '$contrasenia'";
 $resultado = $con->ejecutarSQL($sql);
@@ -27,6 +30,7 @@ if ($resultado->num_rows == 1) {
   $foto = $con->ejecutarSQL($sql5)->fetch_assoc()["imagen"];
   // obtener nombre de usuario
   $nombre = $con->ejecutarSQL($sql6)->fetch_assoc()["nombre"];
+
   // Guardar el rol en una variable de sesión
   $_SESSION["idUser"]=$id;
   $_SESSION["foto"]=$foto;
@@ -34,8 +38,18 @@ if ($resultado->num_rows == 1) {
   $_SESSION["rol"] = $rol;
   $_SESSION["correo"]=$correo;
   $_SESSION["contrasenia"]=$contrasenia;
-  // Redirigir según el rol del usuario
 
+  // Establecer una cookie para recordar al usuario si "Remember Me" está marcado
+  if ($rememberMe) {
+    setcookie('rememberMe', 'true', time() + 86400 * 30); //30 días de validez
+  } else {
+    // Si no está marcado, eliminar la cookie si existe
+    if (isset($_COOKIE['rememberMe'])) {
+      setcookie('rememberMe', '', time() - 3600);
+    }
+  }
+
+  // Redirigir según el rol del usuario
   if ($rol == "administrador") {
     header("Location: ../indexAdmin.php");
   } elseif ($rol == "usuario") {
