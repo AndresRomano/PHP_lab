@@ -58,6 +58,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['Enviar'])) {
     }
     header("Location: ../item.php?id=" . $itemId);
     exit;
+}elseif($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['Eliminar'])){
+    $sql = "DELETE FROM `coleccion-usuario` WHERE item = '$itemId' AND usuario = $usuarioId";
+            $con->ejecutarSQL($sql);
+            header("location: ../indexUser.php");
+
 } else {
     // Redireccionar si no se ha enviado el formulario
     header("Location: ../item.php?id=" . $itemId);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2023 a las 05:02:20
+-- Tiempo de generación: 04-07-2023 a las 23:47:28
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -63,6 +63,7 @@ CREATE TABLE `autores` (
 INSERT INTO `autores` (`idAutor`, `nombre`) VALUES
 (2, 'Alan Wake'),
 (1, 'Brandon Sanderson'),
+(5, 'George R. R. Martin'),
 (4, 'Joe Madureira');
 
 -- --------------------------------------------------------
@@ -105,7 +106,8 @@ CREATE TABLE `coleccion` (
 INSERT INTO `coleccion` (`idcoleccion`, `nombre`, `categoria`) VALUES
 (1, 'Chainsaw Man (manga)', 'manga'),
 (2, 'El Archivo De Las Tormentas (Libro)', 'libro'),
-(3, 'Battle Chasers (Cómic)', 'comic');
+(3, 'Battle Chasers (Cómic)', 'comic'),
+(4, 'Canción de hielo y fuego', 'libro');
 
 -- --------------------------------------------------------
 
@@ -119,6 +121,17 @@ CREATE TABLE `coleccion-usuario` (
   `usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `coleccion-usuario`
+--
+
+INSERT INTO `coleccion-usuario` (`idcoleccion-usuario`, `item`, `usuario`) VALUES
+(3, 1, 5),
+(4, 2, 6),
+(6, 1, 6),
+(7, 5, 6),
+(8, 4, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -131,6 +144,17 @@ CREATE TABLE `comentario` (
   `item` int(11) NOT NULL,
   `mensaje` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `comentario`
+--
+
+INSERT INTO `comentario` (`idcomentario`, `usuario`, `item`, `mensaje`) VALUES
+(1, 5, 1, 'hola'),
+(2, 5, 1, 'esto es un nuevo comentario'),
+(3, 5, 1, 'tercer comentario\r\n'),
+(4, 6, 1, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa'),
+(5, 6, 1, 'uaaaaaaaaaaaaaaaaaaaaa');
 
 -- --------------------------------------------------------
 
@@ -188,9 +212,13 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`iditem`, `coleccion`, `titulo`, `genero`, `descripcion`, `autor`, `año`, `puntaje`, `imagen`, `fechaIngreso`) VALUES
-(1, 'El Archivo De Las Tormentas (Libro)', '1: El Camino De Los Reyes', 'Fantasía', 'El camino de los reyes es una novela de fantasía épica escrita por el autor estadounidense Brandon Sanderson y el primer libro de la saga El archivo de las Tormentas.', 'Brandon Sanderson', 1997, NULL, '1-elCamDeR.JPG', '2023-06-27'),
+(1, 'El Archivo De Las Tormentas (Libro)', '1: El Camino De Los Reyes', 'Fantasía', 'El camino de los reyes es una novela de fantasía épica escrita por el autor estadounidense Brandon Sanderson y el primer libro de la saga El archivo de las Tormentas.', 'Brandon Sanderson', 1997, 5, '1-elCamDeR.JPG', '2023-06-27'),
 (2, 'El Archivo De Las Tormentas (Libro)', '2: Palabras Radiantes', 'Fantasía', 'Palabras Radiantes es una novela de fantasía épica escrita por el autor estadounidense Brandon Sanderson y el segundo libro de la saga El archivo de las Tormentas.', 'Brandon Sanderson', 2015, NULL, '', '2023-06-27'),
-(3, 'Battle Chasers (Cómic)', 'Battle Chasers - Anthología Integral', 'Fantasía', 'Este volumen recopila todos los números publicados de uno de los cómics más queridos de todos los tiempos. ¡En esta edición de la obra de Joe Madureira y Munier Sharrieff se combinan elementos de fantasía, steampunk y ciencia ficción con aventura y a', 'Joe Madureira', 2011, 5, 'battle-chasers-anthology.jpg', '2023-06-27');
+(3, 'Battle Chasers (Cómic)', 'Battle Chasers - Anthología Integral', 'Fantasía', 'Este volumen recopila todos los números publicados de uno de los cómics más queridos de todos los tiempos. ¡En esta edición de la obra de Joe Madureira y Munier Sharrieff se combinan elementos de fantasía, steampunk y ciencia ficción con aventura y a', 'Joe Madureira', 2011, 5, 'battle-chasers-anthology.jpg', '2023-06-27'),
+(4, 'El Archivo De Las Tormentas (Libro)', '3: Juramentada', 'Fantasía', 'Tercer libro del Archivo de Las Tormentas.', 'Brandon Sanderson', 2017, NULL, '3-juramentada.jpg', '2023-07-04'),
+(5, 'Canción de hielo y fuego', '1- Juego de tronos', 'Fantasía', 'Es una novela de fantasía escrita por el autor estadounidense George R. R. Martin en 1996.', 'George R. R. Martin', 1996, NULL, '', '2023-07-04'),
+(6, 'Canción de hielo y fuego', '2- Choque de reyes', 'Fantasía', 'Es el segundo libro de la saga de fantasía épica Canción de hielo y fuego del escritor George R. R. Martin. La obra original fue publicada en noviembre de 1998 en Reino Unido.', 'George R. R. Martin', 1998, NULL, '', '2023-07-04'),
+(7, 'Canción de hielo y fuego', '3- Tormenta de espadas', 'Fantasía', 'Es el tercer libro de la saga de literatura fantástica Canción de hielo y fuego y su autor es George R. R. Martin. El original en inglés se publicó en agosto del 2000 en el Reino Unido.', 'George R. R. Martin', 2000, NULL, '', '2023-07-04');
 
 -- --------------------------------------------------------
 
@@ -203,6 +231,13 @@ CREATE TABLE `itemdeseado-usuario` (
   `item` int(11) NOT NULL,
   `usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `itemdeseado-usuario`
+--
+
+INSERT INTO `itemdeseado-usuario` (`iditemDeseado-Usuario`, `item`, `usuario`) VALUES
+(4, 3, 6);
 
 -- --------------------------------------------------------
 
@@ -241,7 +276,8 @@ CREATE TABLE `puntaje` (
 --
 
 INSERT INTO `puntaje` (`idpuntaje`, `item`, `usuario`, `nota`) VALUES
-(1, 3, 5, 5);
+(1, 3, 5, 5),
+(6, 1, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -255,6 +291,18 @@ CREATE TABLE `respuesta` (
   `usuario` int(11) NOT NULL,
   `mensaje` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `respuesta`
+--
+
+INSERT INTO `respuesta` (`idrespuesta`, `comentario`, `usuario`, `mensaje`) VALUES
+(1, 1, 5, 'heyyy'),
+(2, 1, 5, 'otra respuesta'),
+(3, 3, 5, 'respuesta al tercer comentario'),
+(4, 1, 6, 'sadgagsadsfd'),
+(5, 5, 6, 'asdfasfsafsadfasdf'),
+(6, 2, 6, 'te rompo todo wacho\r\n');
 
 -- --------------------------------------------------------
 
@@ -406,7 +454,7 @@ ALTER TABLE `autor-obra`
 -- AUTO_INCREMENT de la tabla `autores`
 --
 ALTER TABLE `autores`
-  MODIFY `idAutor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idAutor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -418,19 +466,19 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `coleccion`
 --
 ALTER TABLE `coleccion`
-  MODIFY `idcoleccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idcoleccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `coleccion-usuario`
 --
 ALTER TABLE `coleccion-usuario`
-  MODIFY `idcoleccion-usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcoleccion-usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `idcomentario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcomentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `genero`
@@ -448,13 +496,13 @@ ALTER TABLE `genero-item`
 -- AUTO_INCREMENT de la tabla `item`
 --
 ALTER TABLE `item`
-  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `itemdeseado-usuario`
 --
 ALTER TABLE `itemdeseado-usuario`
-  MODIFY `iditemDeseado-Usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `iditemDeseado-Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -466,7 +514,13 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `puntaje`
 --
 ALTER TABLE `puntaje`
-  MODIFY `idpuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idpuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `respuesta`
+--
+ALTER TABLE `respuesta`
+  MODIFY `idrespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

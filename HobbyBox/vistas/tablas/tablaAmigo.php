@@ -3,7 +3,7 @@ $name = $_SESSION["idUser"];
 ?>
 <div class="contenedor1">
     <?php 
-    include ("./persistencia/connect.php");
+    // include ("./persistencia/connect.php");
     $con = new Conexion();?>
     <table class="table table-striped table-bordered">
       <tr>

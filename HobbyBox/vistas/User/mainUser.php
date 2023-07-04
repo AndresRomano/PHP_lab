@@ -7,7 +7,19 @@ if (isset($_SESSION["nombre"])) {
   $nombreUsuario = "ERROR";
 }
 ?>
+<?php
+include("./persistencia/connect.php");
+$con = new Conexion();
 
+$itUsr = "SELECT COUNT(*) FROM `coleccion-usuario` WHERE usuario='" . $_SESSION['idUser'] . "'";
+$resItUsr = $con->ejecutarSQL($itUsr)->fetch_assoc()['COUNT(*)'];
+
+$colsUsr = "SELECT COUNT(DISTINCT coleccion) AS numColecciones FROM item WHERE iditem IN(SELECT item FROM `coleccion-usuario` WHERE usuario='" . $_SESSION['idUser'] . "')";
+$resColsUsr = $con->ejecutarSQL($colsUsr)->fetch_assoc()['numColecciones'];
+
+$desUsr = "SELECT COUNT(*) FROM `itemdeseado-usuario` WHERE usuario='" . $_SESSION['idUser'] . "'";
+$resDesUsr = $con->ejecutarSQL($desUsr)->fetch_assoc()['COUNT(*)'];
+?>
 <br>
 <main class="bg-secondary d-flex justify-content-between rounded-start rounded-end ">
   
@@ -28,32 +40,28 @@ if (isset($_SESSION["nombre"])) {
       <div  class=" contenedor1 d-flex justify-content-between rounded-3 p-2" style="background-color: #efefef;">
           <div>
               <p class="small text-muted mb-1">Items</p>
-              <p class="mb-0">41</p>
+              <p class="mb-0"><?php echo $resItUsr; ?></p>
           </div>
           <div class="px-3">
-              <p class="small text-muted mb-1">Coleccion</p>
-              <p class="mb-0">976</p>
+              <p class="small text-muted mb-1">Colecciones</p>
+              <p class="mb-0"><?php echo $resColsUsr; ?></p>
           </div>
           <div>
-              <p class="small text-muted mb-1">Buesquedas</p>
-              <p class="mb-0">8.5</p>
-          </div>
-          <div>
-              <p class="small text-muted mb-1">bibliotecas</p>
-              <p class="mb-0">8.5</p>
+              <p class="small text-muted mb-1">Buscados</p>
+              <p class="mb-0"><?php echo $resDesUsr; ?></p>
           </div>
       </div>
   </div>
 
 
   <div  class="d-flex contenedor1">
-    <div id="buscados" class="contenedor1 " style="height: 600px;">
-        <!-- Contenido de la sección "buscados" -->
+    <div id="buscados" class="contenedor1 ">
+          <?php include './vistas/indexDeseados.php'; ?>
     </div>
-    <div id="novedades" class="contenedor1 " style="height: 600px;">
+    <div id="novedades" class="contenedor1 " >
           <!-- Contenido de la sección "Novedades" -->
     </div>
-    <div id="amigos" class="contenedor1 " style="height: 600px;">
+    <div id="amigos" class="contenedor1 " >
           <?php include './vistas/User/buscadosUser.php'; ?>
     </div>
     <div id="bibliotecas" class="contenedor1 ">
