@@ -1,5 +1,4 @@
 <?php
-/*
 require_once './persistencia/connect.php';
 $con = new Conexion();
 
@@ -12,7 +11,6 @@ $resultado = $con->ejecutarSQL($sql);
 
 // Verificar si se encontraron resultados
 if ($resultado && $resultado->num_rows > 0) {
-    echo '<div class="row">';
     $coleccionActual = null; // Variable para almacenar la colección actual
 
     // Recorrer los resultados y generar las cards según la categoría y colección
@@ -50,10 +48,11 @@ if ($resultado && $resultado->num_rows > 0) {
         </div>
     </div>';
     }
+
+    // Cerrar el último contenedor de la colección
     echo '</div>';
 } else {
     // No se encontraron resultados para la categoría y colección especificadas
     echo '<p style="color: white;">No se encontraron items en esta categoría y colección.</p>';
 }
-*/
 ?>

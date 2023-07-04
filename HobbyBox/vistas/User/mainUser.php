@@ -56,7 +56,7 @@ $resDesUsr = $con->ejecutarSQL($desUsr)->fetch_assoc()['COUNT(*)'];
 
   <div  class="d-flex contenedor1">
     <div id="buscados" class="contenedor1 ">
-          <?php include './vistas/indexDeseados.php'; ?>
+          <?php include './vistas/User/indexDeseados.php'; ?>
     </div>
     <div id="novedades" class="contenedor1 " >
           <!-- Contenido de la sección "Novedades" -->
@@ -65,7 +65,7 @@ $resDesUsr = $con->ejecutarSQL($desUsr)->fetch_assoc()['COUNT(*)'];
           <?php include './vistas/User/buscadosUser.php'; ?>
     </div>
     <div id="bibliotecas" class="contenedor1 ">
-          <?php include './vistas/indexBiblioteca.php'; ?>
+          <?php include './vistas/User/indexBiblioteca.php'; ?>
     </div>
   </div>
 </div>
