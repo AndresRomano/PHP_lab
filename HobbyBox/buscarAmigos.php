@@ -34,8 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <!-- Contenido de la tarjeta de amigo -->
                 <br>
                 <div class="g-0">
+                <?php echo $nombre; ?>
                     <div class=" align-items-center ">
-                        <?php echo $nombre; ?>
+                        
                         <br>
                         <div class="align-items-center ">
                             <img src="<?php echo $imagePath; ?>" width="100" height="150" class="card-img-top rounded-circle" alt="Avatar" style="max-width: 200px;">
@@ -45,23 +46,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php
                     $query = "SELECT * FROM amigo WHERE usuario1='$name' AND usuario2='$id'";
                     $result = $con2->ejecutarSQL($query);
-
+                    
                     if ($result && mysqli_num_rows($result) == null) {
                         ?>
-                        <form method="post">
+                        <form method="post" action="seguir.php">
                             <input type="hidden" name="amigo_id" value="<?php echo $id; ?>">
                             <input class="btn btn-outline-primary me-1 flex-grow-1" type="submit" name="seguir" value="Seguir" />
                         </form>
                         <?php
-                    }
-
-                    if (isset($_POST['seguir']) && isset($_POST['amigo_id'])) {
-                        $amigo_id = $_POST['amigo_id'];
-                        $sql = "INSERT INTO amigo (usuario1, usuario2) VALUES ('$name', '$amigo_id')";
-                        $con->ejecutarSQL($sql);
-                        echo "<script>
-                            window.location.href='./indexUser.php';
-                        </script>";
+                    
+                        
                     }
                     ?>
                 </div>
