@@ -13,7 +13,7 @@ $resultado = $con->ejecutarSQL($sql);
 if ($resultado && $resultado->num_rows > 0) {
     echo '<div class="row">';
     $coleccionActual = null; // Variable para almacenar la colección actual
-
+    
     // Recorrer los resultados y generar las cards según la categoría y colección
     while ($row = $resultado->fetch_assoc()) {
         // Obtener los valores de los atributos del item y la colección
@@ -33,7 +33,7 @@ if ($resultado && $resultado->num_rows > 0) {
             if ($coleccionActual !== null) {
                 echo '</div>'; // Cerrar el contenedor de la colección anterior
             }
-            echo '<div class="contenedor1">';
+            echo '<div class="contenedor1 row ">';
             echo '<h5 style="color: white;">Colección: ' . $coleccion . '</h5>';
             $coleccionActual = $coleccion;
 
@@ -55,21 +55,25 @@ if ($resultado && $resultado->num_rows > 0) {
         }
 
         // Generar la card dinámica según la categoría y colección
-        echo '<div class="col-2">
-            <div class="card" style="width: 10rem; align-items: center; color: white; background-color: rgb(61, 61, 61);">
-                <img src="' . $imagePath . '" width="100" height="150" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">' . $titulo . '</h5>
-                    <a href="./item.php?id=' . $id . '" class="btn btn-secondary">Ver Item</a>
-                    <form action="./controladora/ctrlItemObt.php" method="POST">
-                        <input type="hidden" name="itemId" value="' . $id . '">
-                        <button type="submit" class="btn btn-danger" name="Eliminar">Eliminar</button>
-                    </form>
-                </div>
-            </div>
-        </div>';
-    }
-    echo '</div>';
+        echo '<div class="col-12 col-sm-6 col-md-4 col-lg-3">';
+        echo '<div class="card" style="width: 100%; height: 400px; align-items: center; color: white; background-color: rgb(61, 61, 61);">';
+        echo '<div style="height: 200px; overflow: hidden;">'; // Altura fija para la imagen
+        echo '<img src="' . $imagePath . '" class="card-img-top" style="width: 100%; height: 100%; object-fit: cover;">'; // Ajuste de imagen con object-fit
+        echo '</div>';
+        echo '<div class="card-body">';
+        echo '<h5 class="card-title">' . $titulo . '</h5>';
+        echo '<a href="./item.php?id=' . $id . '" class="btn btn-secondary">Ver Item</a>';
+        echo '<form action="./controladora/ctrlItemObt.php" method="POST">';
+        echo '<input type="hidden" name="itemId" value="' . $id . '">';
+        echo '<button type="submit" class="btn btn-danger" name="Eliminar">Eliminar</button>';
+        echo '</form>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+
+
+}
+echo '</div>';
 
     // Cerrar el último contenedor de la colección
     echo '</div>';

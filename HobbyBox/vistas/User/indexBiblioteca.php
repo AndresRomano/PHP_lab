@@ -2,7 +2,7 @@
   <h5 style="color: white;">Libros:</h5>
   <?php $categoria = 'libro'; include './vistas/cards/cardBiblioteca.php'?>
   </div>
-
+  <br>
   <div class="contenedor1">
   <h5 style="color: white;">Películas:</h5>
   <?php $categoria = 'pelicula'; include './vistas/cards/cardBiblioteca.php' ?>
