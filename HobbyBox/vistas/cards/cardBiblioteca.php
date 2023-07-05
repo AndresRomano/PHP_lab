@@ -65,7 +65,7 @@ if ($resultado && $resultado->num_rows > 0) {
         echo '<a href="./item.php?id=' . $id . '" class="btn btn-secondary">Ver Item</a>';
         echo '<form action="./controladora/ctrlItemObt.php" method="POST">';
         echo '<input type="hidden" name="itemId" value="' . $id . '">';
-        echo '<button type="submit" class="btn btn-danger" name="Eliminar">Eliminar</button>';
+        echo '<br><button type="submit" class="btn btn-danger" name="Eliminar">Eliminar</button>';
         echo '</form>';
         echo '</div>';
         echo '</div>';
