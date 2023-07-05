@@ -25,14 +25,14 @@ $resDesUsr = $con->ejecutarSQL($desUsr)->fetch_assoc()['COUNT(*)'];
 <main class="bg-secondary d-flex justify-content-between rounded-start rounded-end ">
   
 <div class="d-flex align-items-center position-relative contenedor1 flex-column"> 
-  <div class="d-flex flex-row contenedor1">
+  <div class="d-flex flex-row contenedor1 ">
     
-    <div style="color: white; text-align: center;"> 
+  <div class=" align-items-center text-center" style="color: white;">
     <a href="#" data-bs-toggle="modal" data-bs-target="#modalForm">
       <img src="<?php echo $imagePath; ?>" class="rounded-circle shadow-4" style="width: 150px; margin-right: 40px;" alt="Avatar" />
     </a>
     <br>
-    <label for="nombre" class="form-label"><?php echo $nombreUsuario; ?></label>
+    <label for="nombre" class="form-label" style="margin: 0 auto; margin-left: -45px;"><?php echo $nombreUsuario; ?></label>
     </div>
 
     <?php include './vistas/User/modalUser.php'; ?>

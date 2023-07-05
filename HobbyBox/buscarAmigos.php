@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = $con->ejecutarSQL($sql);
     // Mostrar los resultados de la búsqueda
     ob_start(); // Iniciar almacenamiento en búfer de salida
+    echo '<div class="row">'; // Agregar una fila para contener las tarjetas de amigo
     while ($row = $resultado->fetch_assoc()) {
         $id = $row['idusuario'];
         $nombre = $row['nombre'];
@@ -28,21 +29,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $imagePath = "./imagenes/no-image.jpg";
         }
-
-        ob_start(); // Iniciar almacenamiento en búfer de salida para el resultado de búsqueda
         ?>
-        <div class="card mb-3" style="max-width: 540px;">
-            <br>
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <?php echo $nombre; ?>
-                    <div class="col-2">
-                        <div class="card" style="width: 10rem; align-items: center; color: white; background-color: rgb(61, 61, 61);">
-                            <img src="<?php echo $imagePath; ?>" width="100" height="150" class="card-img-top">
-                        </div>
-                    </div>
-                    <br>
 
+        <div class="col-md-4"> <!-- Agregar una columna para cada tarjeta de amigo -->
+            <div class="card mb-4 bg-dark  align-items-center" style="max-width: 300px; color: white; text-align: center;">
+                <!-- Contenido de la tarjeta de amigo -->
+                <br>
+                <div class="g-0">
+                    <div class=" align-items-center ">
+                        <?php echo $nombre; ?>
+                        <br>
+                        <div class="align-items-center ">
+                            <img src="<?php echo $imagePath; ?>" width="100" height="150" class="card-img-top rounded-circle" alt="Avatar" style="max-width: 200px;">
+                        </div>
+                        <br>
+                    </div>
                     <?php
                     $query = "SELECT * FROM amigo WHERE usuario1='$name' AND usuario2='$id'";
                     $result = $con2->ejecutarSQL($query);
@@ -50,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($result && mysqli_num_rows($result) == null) {
                         ?>
                         <form method="post">
-                            <input type="submit" name="<?php echo $id; ?>" value="Seguir" />
+                            <input class="btn btn-outline-primary me-1 flex-grow-1" type="submit" name="<?php echo $id; ?>" value="Seguir" />
                         </form>
-                    <?php
+                        <?php
                     }
 
                     if (isset($_POST[$id])) {
@@ -63,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </script>";
                     }
                     ?>
-
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -72,9 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
         <?php
-        $searchResultHTML = ob_get_clean(); // Obtener el contenido del búfer de salida para el resultado de búsqueda
-        echo $searchResultHTML; // Mostrar el resultado de búsqueda en la página
     }
+    echo '</div>'; // Cerrar la fila después de mostrar todas las tarjetas de amigo
     $searchResults = ob_get_clean(); // Obtener el contenido del búfer de salida completo para todos los resultados de búsqueda
 
     // Mostrar mensaje si no se encontraron resultados
