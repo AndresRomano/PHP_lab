@@ -7,16 +7,13 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item active">
-            <a id="enlace-buscados" class="nav-link" aria-current="page" href="#">Buscados</a>
-        </li>
-        <li class="nav-item">
-            <a id="enlace-novedades" class="nav-link" href="#">Novedades</a>
+            <a id="enlace-buscados" class="nav-link" aria-current="page" href="#">Deseados</a>
         </li>
         <li class="nav-item">
             <a id="enlace-amigos" class="nav-link" href="#">Amigos</a>
         </li>
     </ul>
-      <form class="d-flex ms-auto mb-2 mb-lg-0 flex-grow-1" action="buscarAmigos.php" method="post">
+      <form class="d-flex ms-auto mb-2 mb-lg-0 flex-grow-1" action="./buscarAmigos.php" method="post">
       <input class="form-control me-2" type="search" name ="fSearch2" placeholder="Buscar Amigos..." aria-label="Search">
       <button class="btn btn-outline-secondary" type="submit">Buscar</button>
         </button>
@@ -24,3 +21,5 @@
     </div>
   </div>
 </nav>
+
+

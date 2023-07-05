@@ -11,6 +11,7 @@ if (isset($_SESSION["nombre"])) {
 include("./persistencia/connect.php");
 $con = new Conexion();
 
+
 $itUsr = "SELECT COUNT(*) FROM `coleccion-usuario` WHERE usuario='" . $_SESSION['idUser'] . "'";
 $resItUsr = $con->ejecutarSQL($itUsr)->fetch_assoc()['COUNT(*)'];
 
@@ -58,11 +59,9 @@ $resDesUsr = $con->ejecutarSQL($desUsr)->fetch_assoc()['COUNT(*)'];
     <div id="buscados" class="contenedor1 ">
           <?php include './vistas/User/indexDeseados.php'; ?>
     </div>
-    <div id="novedades" class="contenedor1 " >
-          <!-- Contenido de la sección "Novedades" -->
-    </div>
     <div id="amigos" class="contenedor1 " >
-          <?php include './vistas/User/buscadosUser.php'; ?>
+          <?php include './vistas/User/buscadosUser.php'; 
+          //include './vistas/User/buscarAmigos.php';?>
     </div>
     <div id="bibliotecas" class="contenedor1 ">
           <?php include './vistas/User/indexBiblioteca.php'; ?>
