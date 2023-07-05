@@ -1,8 +1,6 @@
 <?php
 session_start();
-?>
 
-<?php
 // Incluir el archivo de conexión a la base de datos
 $name = $_SESSION["idUser"];
 require_once './persistencia/connect.php';
@@ -51,13 +49,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($result && mysqli_num_rows($result) == null) {
                         ?>
                         <form method="post">
-                            <input class="btn btn-outline-primary me-1 flex-grow-1" type="submit" name="<?php echo $id; ?>" value="Seguir" />
+                            <input type="hidden" name="amigo_id" value="<?php echo $id; ?>">
+                            <input class="btn btn-outline-primary me-1 flex-grow-1" type="submit" name="seguir" value="Seguir" />
                         </form>
                         <?php
                     }
 
-                    if (isset($_POST[$id])) {
-                        $sql = "INSERT INTO amigo (usuario1, usuario2) VALUES ('$name', '$id')";
+                    if (isset($_POST['seguir']) && isset($_POST['amigo_id'])) {
+                        $amigo_id = $_POST['amigo_id'];
+                        $sql = "INSERT INTO amigo (usuario1, usuario2) VALUES ('$name', '$amigo_id')";
                         $con->ejecutarSQL($sql);
                         echo "<script>
                             window.location.href='./indexUser.php';
@@ -87,3 +87,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 ?>
+
