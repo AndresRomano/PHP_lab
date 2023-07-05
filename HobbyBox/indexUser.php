@@ -31,3 +31,4 @@ if ($_SESSION["rol"] !== "usuario") {
 <br>
   <?php include './vistas/footer.php'; ?>
 </html>
+<?php include './vistas/User/scriptBuscador.php'; ?>

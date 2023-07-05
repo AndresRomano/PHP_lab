@@ -1,21 +1,7 @@
-<?php 
+<?php
 session_start();
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./estilos/estilos.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <title>Index</title>
-</head>
-<body class="img" style="background-image: url(./imagenes/bg.png);">
-<div class="contenedor1">
-<br>
-<br>
+
 <?php
 // Incluir el archivo de conexión a la base de datos
 $name = $_SESSION["idUser"];
@@ -24,79 +10,81 @@ $con = new Conexion();
 $con2 = new Conexion();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $searchTerm = $_POST['fSearch2'];  ///CORREGIR
+    $searchTerm = $_POST['fSearch2'];
     // Crear una nueva instancia de la conexión a la base de datos
-    
+
     // Realizar la búsqueda en la base de datos y obtener los resultados
-    $sql = "SELECT * FROM usuario WHERE nombre LIKE '%$searchTerm%' and not idusuario='".$name."'";
+    $sql = "SELECT * FROM usuario WHERE nombre LIKE '%$searchTerm%' AND NOT idusuario='$name'";
     $resultado = $con->ejecutarSQL($sql);
     // Mostrar los resultados de la búsqueda
+    ob_start(); // Iniciar almacenamiento en búfer de salida
     while ($row = $resultado->fetch_assoc()) {
         $id = $row['idusuario'];
         $nombre = $row['nombre'];
         $imagen = $row['imagen'];
 
-
-
         if (isset($imagen) && !empty($imagen)) {
-          $imagePath = "./imagenes/".$imagen;
+            $imagePath = "./imagenes/" . $imagen;
         } else {
-          $imagePath = "./imagenes/no-image.jpg";
+            $imagePath = "./imagenes/no-image.jpg";
         }
 
-        echo '<div class="card mb-3" style="max-width: 540px;">';
-        echo "<br>";
-        echo '<div class="row g-0">';
-        echo '<div class="col-md-4">';
-        echo $nombre;
-        echo '<div class="col-2">
-        <div class="card" style="width: 10rem; align-items: center; color: white; background-color: rgb(61, 61, 61);">
-                <img src="' . $imagePath . '" width="100" height="150" class="card-img-top">
-              </div>
-            </div>';
-        
-        echo "<br>";
+        ob_start(); // Iniciar almacenamiento en búfer de salida para el resultado de búsqueda
+        ?>
+        <div class="card mb-3" style="max-width: 540px;">
+            <br>
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <?php echo $nombre; ?>
+                    <div class="col-2">
+                        <div class="card" style="width: 10rem; align-items: center; color: white; background-color: rgb(61, 61, 61);">
+                            <img src="<?php echo $imagePath; ?>" width="100" height="150" class="card-img-top">
+                        </div>
+                    </div>
+                    <br>
 
-        $query = "SELECT * FROM amigo WHERE usuario1 = '$name' and usuario2='$id'";
+                    <?php
+                    $query = "SELECT * FROM amigo WHERE usuario1='$name' AND usuario2='$id'";
+                    $result = $con2->ejecutarSQL($query);
 
-        $result = $con2->ejecutarSQL($query);
+                    if ($result && mysqli_num_rows($result) == null) {
+                        ?>
+                        <form method="post">
+                            <input type="submit" name="<?php echo $id; ?>" value="Seguir" />
+                        </form>
+                    <?php
+                    }
 
-        if ($result) {
-            if (mysqli_num_rows($result) == null) 
-            {
-              ?>
-              <form method="post">
-              <input type="submit" name=<?php echo $id; ?> value="seguir"/>
-              </form>
-          <?php
-            }
-          }
-        if(isset($_POST[ $id]))
-        {
-          $sql = "INSERT INTO amigo (usuario1, usuario2) VALUES ('$name',' $id')";
-          $con->ejecutarSQL($sql);
-          //header("location: ../hobbybox/indexUser.php");
-          echo "<script>
-          window.location.href='./indexUser.php';
-        </script>";
-        }
+                    if (isset($_POST[$id])) {
+                        $sql = "INSERT INTO amigo (usuario1, usuario2) VALUES ('$name', '$id')";
+                        $con->ejecutarSQL($sql);
+                        echo "<script>
+                            window.location.href='./indexUser.php';
+                        </script>";
+                    }
+                    ?>
 
-        
-        echo '</div>';
-        echo '<div class="col-md-8">';
-        echo '<div class="card-body">';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-        echo '</a>';
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+        $searchResultHTML = ob_get_clean(); // Obtener el contenido del búfer de salida para el resultado de búsqueda
+        echo $searchResultHTML; // Mostrar el resultado de búsqueda en la página
     }
+    $searchResults = ob_get_clean(); // Obtener el contenido del búfer de salida completo para todos los resultados de búsqueda
+
     // Mostrar mensaje si no se encontraron resultados
     if ($resultado->num_rows === 0) {
-        echo 'No se encontraron resultados.';
+        $searchResults = 'No se encontraron resultados.';
     }
+
+    // Devolver los resultados de búsqueda como respuesta AJAX
+    header('Content-Type: application/json');
+    echo json_encode($searchResults);
+    exit();
 }
 ?>
-  </div>
-  </body>
-</html>
