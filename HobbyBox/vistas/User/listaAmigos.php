@@ -22,7 +22,7 @@ while ($row = $resultado->fetch_assoc()) {
     } else {
         $imagePath = "./imagenes/no-image.jpg";
     }
-
+    // Mostrar la información del amigo
     ?>
     <a href="#" class="bg-dark list-group-item list-group-item-action py-3 lh-sm">
         <div class="d-flex w-100 align-items-center justify-content-between">
@@ -30,9 +30,8 @@ while ($row = $resultado->fetch_assoc()) {
         </div>
         <div class="flex-grow-1 ms-3">
             <h5 class="mb-1" style="color: white;"><?php echo $nombre; ?></h5>
-        
             <div class="d-flex w-100 align-items-center justify-content-between btn btn-outline-secondary">
-                <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                <button type="button" class="btn btn-danger me-1 flex-grow-1 eliminar-btn" data-amigo-id="<?php echo $row['idusuario']; ?>">Dejar de seguir</button>
             </div>
         </div>
     </a>
@@ -45,10 +44,9 @@ $amigosHTML = ob_get_clean(); // Obtener el contenido del búfer de salida compl
 if ($resultado->num_rows === 0) {
     $amigosHTML = '<p>No se encontraron amigos.</p>';
 }
-
-// Mostrar la lista de amigos en el código HTML
 ?>
-<section style="padding-right: 12px; margin-top: 1%;" class="d-flex">
+
+<section style="padding-right: 12px; margin-top: 1%;" class="d-flex" id="lista-amigos">
     <aside class="bg-dark d-flex flex-column align-items-stretch flex-shrink-0 float-end rounded-start rounded-end" style="width: 380px;">
         <div class="bg-body-tertiary d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom float-end rounded-start">
             <span class="fs-5 fw-semibold">Mis Amigos</span>
@@ -58,3 +56,5 @@ if ($resultado->num_rows === 0) {
         </div>
     </aside>
 </section>
+
+<?php include './vistas/User/scriptEliminarAmigo.php'; ?>

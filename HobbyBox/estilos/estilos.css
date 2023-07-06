@@ -74,4 +74,16 @@ form input {
   border-radius: 6px;
   outline: none;
 }
+#amigos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+#amigos .card {
+  flex: 1 1 auto;
+  margin-right: 5px;
+}
+
 

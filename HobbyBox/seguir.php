@@ -1,36 +1,37 @@
 <?php
 session_start();
 
-// Verificar si se ha iniciado sesión
-if (!isset($_SESSION['idUser'])) {
-    // Redireccionar a la página de inicio de sesión u otra página
-    header('Location: login.php');
-    exit();
-}
+// Incluir el archivo de conexión a la base de datos
+require_once './persistencia/connect.php';
+$con = new Conexion();
 
-// Verificar si se ha enviado el formulario de seguimiento
-if (isset($_POST['amigo_id'])) {
-    // Obtener los datos del formulario
-    $amigo_id = $_POST['amigo_id'];
-    $name = $_SESSION['idUser'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $friendId = $_POST['friendId'];
+    $userId = $_SESSION["idUser"];
 
-    // Realizar la inserción en la base de datos
-    require_once './persistencia/connect.php';
-    $con = new Conexion();
+    // Verificar si ya sigues al amigo
+    $query = "SELECT * FROM amigo WHERE usuario1='$userId' AND usuario2='$friendId'";
+    $result = $con->ejecutarSQL($query);
+    $isFollowing = $result && mysqli_num_rows($result) > 0;
 
-    $sql = "INSERT INTO amigo (usuario1, usuario2) VALUES ('$name', '$amigo_id')";
-
-    if ($con->ejecutarSQL($sql)) {
-        echo "Se guardó correctamente al amigo.";
+    if ($isFollowing) {
+        // Si ya sigues al amigo, eliminar la relación de amistad
+        $query = "DELETE FROM amigo WHERE usuario1='$userId' AND usuario2='$friendId'";
+        $con->ejecutarSQL($query);
+        $success = true;
+        $message = 'Dejaste de seguir al amigo.';
     } else {
-        echo "Error al guardar al amigo: " . mysqli_error($con->getConexion());
+        // Si no sigues al amigo, agregar una nueva relación de amistad
+        $query = "INSERT INTO amigo (usuario1, usuario2) VALUES ('$userId', '$friendId')";
+        $con->ejecutarSQL($query);
+        $success = true;
+        $message = 'Ahora estás siguiendo al amigo.';
     }
 
-    // Redireccionar a la página principal
-    header('Location: indexUser.php');
+    // Devolver la respuesta como JSON
+    header('Content-Type: application/json');
+    echo json_encode(array('success' => $success, 'isFollowing' => !$isFollowing, 'message' => $message));
     exit();
-} else {
-    // Si no se ha enviado el formulario correctamente, redireccionar a la página de origen o mostrar un mensaje de error
-    echo "Error: Datos de seguimiento no recibidos correctamente.";
 }
 ?>
+

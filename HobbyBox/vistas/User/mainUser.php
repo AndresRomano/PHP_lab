@@ -59,20 +59,22 @@ $resDesUsr = $con->ejecutarSQL($desUsr)->fetch_assoc()['COUNT(*)'];
     <div id="buscados" class="contenedor1 ">
           <?php include './vistas/User/indexDeseados.php'; ?>
     </div>
-    <div id="amigos" class="contenedor1 " >
-         
-          
-    </div>
     <div id="bibliotecas" class="contenedor1 ">
           <?php include './vistas/User/indexBiblioteca.php'; ?>
+    </div>
+    <div id="amigos" class="contenedor1 row" >
+    
     </div>
   </div>
 </div>
 
   <?php include './vistas/User/listaAmigos.php'; ?>
-
+  <?php include './vistas/User/scriptBuscador.php'; ?>
+  <?php include './vistas/User/scriptUser.php'; ?>
+  
 </main>
-<?php include './vistas/User/scriptUser.php'; ?>
+
+
 
 
 
