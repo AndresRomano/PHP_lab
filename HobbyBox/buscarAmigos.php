@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userId = $_SESSION["idUser"];
 
     // Realizar la búsqueda en la base de datos y obtener los resultados
-    $sql = "SELECT * FROM usuario WHERE nombre LIKE '%$searchTerm%' AND idusuario != '$userId'";
+    $sql = "SELECT * FROM usuario WHERE (nombre LIKE '%$searchTerm%' OR correo LIKE '%$searchTerm%') AND NOT permisos ='administrador' AND NOT idusuario='$userId'";
     $resultado = $con->ejecutarSQL($sql);
 
     // Crear un array para almacenar los resultados de búsqueda

@@ -1,4 +1,5 @@
 <?php
+
 // Obtener el ID del usuario que inició sesión
 $name = $_SESSION["idUser"];
 
@@ -16,6 +17,7 @@ ob_start(); // Iniciar almacenamiento en búfer de salida
 while ($row = $resultado->fetch_assoc()) {
     $nombre = $row['nombre'];
     $imagen = $row['imagen'];
+    $id = $row['idusuario'];
 
     if (isset($imagen) && !empty($imagen)) {
         $imagePath = "./imagenes/" . $imagen;
@@ -31,7 +33,8 @@ while ($row = $resultado->fetch_assoc()) {
         <div class="flex-grow-1 ms-3">
             <h5 class="mb-1" style="color: white;"><?php echo $nombre; ?></h5>
             <div class="d-flex w-100 align-items-center justify-content-between btn btn-outline-secondary">
-                <button type="button" class="btn btn-danger me-1 flex-grow-1 eliminar-btn" data-amigo-id="<?php echo $row['idusuario']; ?>">Dejar de seguir</button>
+            <button type="button" class="btn btn-danger me-1 flex-grow-1 eliminar-btn" data-amigo-id="<?php echo $row['idusuario']; ?>">Dejar de seguir</button>
+           
             </div>
         </div>
     </a>

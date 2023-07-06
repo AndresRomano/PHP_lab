@@ -14,11 +14,11 @@
 
   if (response.results.length > 0) {
     // Si hay resultados, agregar cada amigo al div
-    var html = '<div class="row justify-content-between mr-auto">';
+    var html = '<div class="row d-flex justify-content-start">';
 
     response.results.forEach(function(amigo) {
       html +=
-        '<div class="col-6 col-md-3 col-lg-2 mb-4 mr-auto">' +
+        '<div class="col-6 col-md-3 col-lg-2 mb-4 friend-card">' +
           '<div class="card h-100" style="width: 10rem; align-items: center; color: white; background-color: rgb(61, 61, 61);">' +
             '<img src="' + amigo.imagen + '" class="card-img-top rounded-circle" alt="Avatar" style="width: 150px; height: 150px;">' +
             '<div class="card-body">' +
@@ -32,6 +32,12 @@
     });
 
     html += '</div>';
+
+// Agregar separación entre los elementos div generados
+html = html.replace(/friend-card/g, 'friend-card mx-4'); // Agrega un margen horizontal de 2 unidades (puedes ajustar el valor según tus necesidades)
+
+// Colocar el contenido HTML en tu div existente
+document.getElementById('amigos').innerHTML = html;
 
     $('#amigos').html(html);
   } else {
